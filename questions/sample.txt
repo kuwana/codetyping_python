@@ -1,0 +1,9 @@
+import curses
+
+def main(stdscr):
+    # ここにメインの処理を書きます
+    pass
+
+if __name__ == "__main__":
+    curses.wrapper(main)
+
