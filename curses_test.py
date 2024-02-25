@@ -1,20 +1,20 @@
 import curses
 
 def main(stdscr):
-    # カーソルを非表示にする
-    curses.curs_set(0)
-    # ウィンドウにテキストを表示
-    stdscr.addstr(0, 0, "Hello, world!")
-    # 画面を更新
-    stdscr.refresh()
-    # キー入力を待機
-    stdscr.getch()
-    # 新しい行にテキストを追加
-    stdscr.addstr(1, 0, "This is a new line!")
-    # 画面を更新
-    stdscr.refresh()
-    # キー入力を待機
-    stdscr.getch()
+    # カーソルを表示にする
+    curses.curs_set(1)
+    # キー入力を非ブロッキングモードに設定
+    stdscr.nodelay(True)
+
+    # メインループ
+    while True:
+        # キー入力を取得
+        key = stdscr.getch()
+        # キーが押されたら、そのキーを表示
+        if key != -1:
+            stdscr.addch(key)
+            # 画面を更新
+            stdscr.refresh()
 
 if __name__ == "__main__":
     # cursesモードを初期化

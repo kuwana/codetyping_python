@@ -3,7 +3,7 @@ import time
 
 def main(stdscr):
     # Cursesの初期化
-    curses.curs_set(0)
+    curses.curs_set(1)
     stdscr.clear()
     stdscr.refresh()
     stdscr.keypad(True)
@@ -26,7 +26,6 @@ def main(stdscr):
 
     # メインループ
     while True:
-        stdscr.clear()
         height, width = stdscr.getmaxyx()
 
         # 問題を描画
@@ -38,22 +37,8 @@ def main(stdscr):
 
         # 入力を取得
         c = stdscr.getch()
+        # 入力キーを下部に表示
         stdscr.addstr(height - 2, 0, "Key pressed: {}".format(c))
-
-        # ウィンドウの高さと幅を取得
-        height, width = stdscr.getmaxyx()
-
-        # カーソルの移動
-        if c == curses.KEY_RIGHT:
-            cursor_x = min(cursor_x + 1, len(content[cursor_y]))
-        elif c == curses.KEY_LEFT:
-            cursor_x = max(cursor_x - 1, 0)
-        elif c == curses.KEY_DOWN:
-            cursor_y = min(cursor_y + 1, len(content) - 1)
-            cursor_x = min(cursor_x, len(content[cursor_y]))
-        elif c == curses.KEY_UP:
-            cursor_y = max(cursor_y - 1, 0)
-            cursor_x = min(cursor_x, len(content[cursor_y]))
 
         # 全ての文字をタイプし終えたかどうかを確認
         if cursor_y == len(content) - 1 and cursor_x == len(content[-1]):
